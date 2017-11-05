@@ -1,4 +1,4 @@
-![Haneke](https://raw.githubusercontent.com/Haneke/HanekeSwift/master/Assets/github-header.png)
+1111![Haneke](https://raw.githubusercontent.com/Haneke/HanekeSwift/master/Assets/github-header.png)
 
 [![Carthage compatible](https://img.shields.io/badge/Carthage-compatible-4BC51D.svg?style=flat)](https://github.com/Carthage/Carthage)
 
@@ -70,15 +70,15 @@ Manually:
 
 ## Using the cache
 
-Haneke provides shared caches for `UIImage`, `NSData`, `JSON` and `String`. You can also create your own caches. 
+Haneke provides shared caches for `UIImage`, `NSData`, `JSON` and `String`. You can also create your own caches.
 
 The cache is a key-value store. For example, here's how you would cache and then fetch some data.
 
 ```Swift
 let cache = Shared.dataCache
-        
+
 cache.set(value: data, key: "funny-games.mp4")
-        
+
 // Eventually...
 
 cache.fetch(key: "funny-games.mp4").onSuccess { data in
@@ -86,12 +86,12 @@ cache.fetch(key: "funny-games.mp4").onSuccess { data in
 }
 ```
 
-In most cases the value will not be readily available and will have to be fetched from network or disk. Haneke offers convenience `fetch` functions for these cases. Let's go back to the first example, now using a shared cache: 
+In most cases the value will not be readily available and will have to be fetched from network or disk. Haneke offers convenience `fetch` functions for these cases. Let's go back to the first example, now using a shared cache:
 
 ```Swift
 let cache = Shared.JSONCache
 let URL = NSURL(string: "https://api.github.com/users/haneke")!
-    
+
 cache.fetch(URL: URL).onSuccess { JSON in
    print(JSON.dictionary?["bio"])
 }
@@ -176,7 +176,7 @@ Through custom fetchers you can fetch original values from other sources than ne
 * Fetching the value in background and calling the success or failure closure accordingly, both in the main queue
 * Cancelling the fetch on demand, if possible
 
-Fetchers are generic, and the only restriction on their type is that it must implement `DataConvertible`. 
+Fetchers are generic, and the only restriction on their type is that it must implement `DataConvertible`.
 
 ## Supporting additional types
 
@@ -185,15 +185,15 @@ Haneke can cache any type that can be read and saved as data. This is indicated 
 ```Swift
 public protocol DataConvertible {
     typealias Result
-    
+
     class func convertFromData(data:NSData) -> Result?
-    
+
 }
 
 public protocol DataRepresentable {
-    
+
     func asData() -> NSData!
-    
+
 }
 ```
 
@@ -201,17 +201,17 @@ This is how one could add support for `NSDictionary`:
 
 ```Swift
 extension NSDictionary : DataConvertible, DataRepresentable {
-    
+
     public typealias Result = NSDictionary
-    
+
     public class func convertFromData(data:NSData) -> Result? {
         return NSKeyedUnarchiver.unarchiveObjectWithData(data) as? NSDictionary
     }
-    
+
     public func asData() -> NSData! {
         return NSKeyedArchiver.archivedDataWithRootObject(self)
     }
-    
+
 }
 ```
 
@@ -231,13 +231,13 @@ Haneke Swift is in initial development and its public API should not be consider
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;2014 Joan Romano ([@joanromano](https://twitter.com/joanromano))   
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;2014 Luis Ascorbe ([@lascorbe](https://twitter.com/Lascorbe))   
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;2014 Oriol Blanc ([@oriolblanc](https://twitter.com/oriolblanc))   
- 
+
  Licensed under the Apache License, Version 2.0 (the "License");
  you may not use this file except in compliance with the License.
  You may obtain a copy of the License at
- 
+
  http://www.apache.org/licenses/LICENSE-2.0
- 
+
  Unless required by applicable law or agreed to in writing, software
  distributed under the License is distributed on an "AS IS" BASIS,
  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
